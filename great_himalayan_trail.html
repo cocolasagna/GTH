@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "green", "id": "Larkya La High Pass", "label": "Larkya La High Pass", "shape": "circle", "title": "Altitude: 5160m\nCultural: Low"}, {"color": "green", "id": "Manaslu Basecamp", "label": "Manaslu Basecamp", "shape": "circle", "title": "Altitude: 4800m\nCultural: Low"}, {"color": "green", "id": "Khayer Lake", "label": "Khayer Lake", "shape": "circle", "title": "Altitude: 4660m\nCultural: Low"}, {"color": "green", "id": "Dharamsala", "label": "Dharamsala", "shape": "circle", "title": "Altitude: 4460m\nCultural: Low"}, {"color": "green", "id": "Machhapuchhre Base Camp", "label": "Machhapuchhre Base Camp", "shape": "circle", "title": "Altitude: 4000m\nCultural: Low"}, {"color": "green", "id": "Samdo", "label": "Samdo", "shape": "circle", "title": "Altitude: 3875m\nCultural: Low"}, {"color": "green", "id": "Campsite", "label": "Campsite", "shape": "circle", "title": "Altitude: 3699m\nCultural: Low"}, {"color": "green", "id": "Khopra Danda", "label": "Khopra Danda", "shape": "circle", "title": "Altitude: 3640m\nCultural: Low"}, {"color": "green", "id": "Birendra Tal", "label": "Birendra Tal", "shape": "circle", "title": "Altitude: 3600m\nCultural: Low"}, {"color": "green", "id": "Bimthang", "label": "Bimthang", "shape": "circle", "title": "Altitude: 3590m\nCultural: Low"}, {"color": "green", "id": "Samagaon", "label": "Samagaon", "shape": "circle", "title": "Altitude: 3530m\nCultural: Low"}, {"color": "green", "id": "Danphe Lagna", "label": "Danphe Lagna", "shape": "circle", "title": "Altitude: 3500m\nCultural: Low"}, {"color": "green", "id": "Dobato", "label": "Dobato", "shape": "circle", "title": "Altitude: 3438m\nCultural: Low"}, {"color": "green", "id": "Jaljala Chaur", "label": "Jaljala Chaur", "shape": "circle", "title": "Altitude: 3270m\nCultural: Low"}, {"color": "green", "id": "Khumai Danda", "label": "Khumai Danda", "shape": "circle", "title": "Altitude: 3245m\nCultural: Low"}, {"color": "green", "id": "Gorosingha", "label": "Gorosingha", "shape": "circle", "title": "Altitude: 3190m\nCultural: Low"}, {"color": "green", "id": "Lho", "label": "Lho", "shape": "circle", "title": "Altitude: 3180m\nCultural: Low"}, {"color": "green", "id": "Upper Chistibung", "label": "Upper Chistibung", "shape": "circle", "title": "Altitude: 3000m\nCultural: Low"}, {"color": "green", "id": "Rara Lake", "label": "Rara Lake", "shape": "circle", "title": "Altitude: 2990m\nCultural: Low"}, {"color": "green", "id": "Pilicho Camp", "label": "Pilicho Camp", "shape": "circle", "title": "Altitude: 2900m\nCultural: Low"}, {"color": "green", "id": "Chautha", "label": "Chautha", "shape": "circle", "title": "Altitude: 2770m\nCultural: Low"}, {"color": "green", "id": "Ghorepani", "label": "Ghorepani", "shape": "circle", "title": "Altitude: 2675m\nCultural: Low"}, {"color": "green", "id": "Namrung", "label": "Namrung", "shape": "circle", "title": "Altitude: 2660m\nCultural: Low"}, {"color": "green", "id": "Uthugaon", "label": "Uthugaon", "shape": "circle", "title": "Altitude: 2530m\nCultural: Low"}, {"color": "green", "id": "Sinja", "label": "Sinja", "shape": "circle", "title": "Altitude: 2440m\nCultural: Low"}, {"color": "green", "id": "Dhotu", "label": "Dhotu", "shape": "circle", "title": "Altitude: 2380m\nCultural: Low"}, {"color": "green", "id": "Jumla", "label": "Jumla", "shape": "circle", "title": "Altitude: 2370m\nCultural: Low"}, {"color": "green", "id": "Lalka", "label": "Lalka", "shape": "circle", "title": "Altitude: 2250m\nCultural: Low"}, {"color": "green", "id": "Dharapani", "label": "Dharapani", "shape": "circle", "title": "Altitude: 1963m\nCultural: Low"}, {"color": "green", "id": "Dang", "label": "Dang", "shape": "circle", "title": "Altitude: 1800m\nCultural: Low"}, {"color": "green", "id": "Kimche village", "label": "Kimche village", "shape": "circle", "title": "Altitude: 1640m\nCultural: Low"}, {"color": "green", "id": "Ghandruk", "label": "Ghandruk", "shape": "circle", "title": "Altitude: 1640m\nCultural: Low"}, {"color": "green", "id": "Tirkhedhunga", "label": "Tirkhedhunga", "shape": "circle", "title": "Altitude: 1577m\nCultural: Low"}, {"color": "green", "id": "Ribhan Village", "label": "Ribhan Village", "shape": "circle", "title": "Altitude: 1500m\nCultural: Low"}, {"color": "green", "id": "Jagat", "label": "Jagat", "shape": "circle", "title": "Altitude: 1410m\nCultural: Low"}, {"color": "red", "id": "Kathmandu", "label": "Kathmandu", "shape": "circle", "title": "Altitude: 1400m\nCultural: High"}, {"color": "red", "id": "Swayambhunath", "label": "Swayambhunath", "shape": "circle", "title": "Altitude: 1400m\nCultural: High"}, {"color": "red", "id": "Kathmandu Durbar Square", "label": "Kathmandu Durbar Square", "shape": "circle", "title": "Altitude: 1400m\nCultural: High"}, {"color": "green", "id": "Karuwa", "label": "Karuwa", "shape": "circle", "title": "Altitude: 1380m\nCultural: Low"}, {"color": "green", "id": "Ghachok", "label": "Ghachok", "shape": "circle", "title": "Altitude: 1254m\nCultural: Low"}, {"color": "green", "id": "Anante Thati", "label": "Anante Thati", "shape": "circle", "title": "Altitude: 1100m\nCultural: Low"}, {"color": "green", "id": "Birethanti", "label": "Birethanti", "shape": "circle", "title": "Altitude: 1065m\nCultural: Low"}, {"color": "green", "id": "Nayapul", "label": "Nayapul", "shape": "circle", "title": "Altitude: 1050m\nCultural: Low"}, {"color": "green", "id": "Machha Khola", "label": "Machha Khola", "shape": "circle", "title": "Altitude: 930m\nCultural: Low"}, {"color": "red", "id": "Pokhara", "label": "Pokhara", "shape": "circle", "title": "Altitude: 827m\nCultural: High"}, {"color": "green", "id": "Hemja Milanchok", "label": "Hemja Milanchok", "shape": "circle", "title": "Altitude: 827m\nCultural: Low"}, {"color": "green", "id": "Besisahar", "label": "Besisahar", "shape": "circle", "title": "Altitude: 760m\nCultural: Low"}, {"color": "green", "id": "Soti Khola", "label": "Soti Khola", "shape": "circle", "title": "Altitude: 730m\nCultural: Low"}, {"color": "green", "id": "Arughat", "label": "Arughat", "shape": "circle", "title": "Altitude: 530m\nCultural: Low"}, {"color": "orange", "id": "Nepalgunj", "label": "Nepalgunj", "shape": "circle", "title": "Altitude: 150m\nCultural: Medium"}]);
+                  edges = new vis.DataSet([{"from": "Kathmandu", "length": 7, "title": "Distance: 7 km", "to": "Pokhara"}, {"from": "Pokhara", "length": 6, "title": "Distance: 6 km", "to": "Nayapul"}, {"from": "Nayapul", "length": 4, "title": "Distance: 4 km", "to": "Tirkhedhunga"}, {"from": "Tirkhedhunga", "length": 6, "title": "Distance: 6 km", "to": "Ghorepani"}, {"from": "Ghorepani", "length": 6, "title": "Distance: 6 km", "to": "Upper Chistibung"}, {"from": "Upper Chistibung", "length": 4, "title": "Distance: 4 km", "to": "Khopra Danda"}, {"from": "Khayer Lake", "length": 8, "title": "Distance: 8 km", "to": "Khopra Danda"}, {"from": "Khopra Danda", "length": 5, "title": "Distance: 5 km", "to": "Dobato"}, {"from": "Dobato", "length": 6, "title": "Distance: 6 km", "to": "Kimche village"}, {"from": "Kimche village", "length": 7, "title": "Distance: 7 km", "to": "Pokhara"}, {"from": "Pokhara", "length": 1, "title": "Distance: 1 km", "to": "Hemja Milanchok"}, {"from": "Hemja Milanchok", "length": 1, "title": "Distance: 1 km", "to": "Anante Thati"}, {"from": "Anante Thati", "length": 6, "title": "Distance: 6 km", "to": "Lalka"}, {"from": "Lalka", "length": 2, "title": "Distance: 2 km", "to": "Ribhan Village"}, {"from": "Lalka", "length": 7, "title": "Distance: 7 km", "to": "Khumai Danda"}, {"from": "Khumai Danda", "length": 6, "title": "Distance: 6 km", "to": "Campsite"}, {"from": "Campsite", "length": 5, "title": "Distance: 5 km", "to": "Machhapuchhre Base Camp"}, {"from": "Machhapuchhre Base Camp", "length": 6, "title": "Distance: 6 km", "to": "Pilicho Camp"}, {"from": "Pilicho Camp", "length": 4, "title": "Distance: 4 km", "to": "Karuwa"}, {"from": "Karuwa", "length": 5, "title": "Distance: 5 km", "to": "Ghachok"}, {"from": "Ghachok", "length": 1, "title": "Distance: 1 km", "to": "Hemja Milanchok"}, {"from": "Kathmandu", "length": 0, "title": "Distance: 0 km", "to": "Swayambhunath"}, {"from": "Swayambhunath", "length": 0, "title": "Distance: 0 km", "to": "Kathmandu Durbar Square"}, {"from": "Kathmandu", "length": 8, "title": "Distance: 8 km", "to": "Arughat"}, {"from": "Arughat", "length": 0, "title": "Distance: 0 km", "to": "Soti Khola"}, {"from": "Soti Khola", "length": 6, "title": "Distance: 6 km", "to": "Machha Khola"}, {"from": "Machha Khola", "length": 8, "title": "Distance: 8 km", "to": "Jagat"}, {"from": "Jagat", "length": 6, "title": "Distance: 6 km", "to": "Dang"}, {"from": "Dang", "length": 6, "title": "Distance: 6 km", "to": "Namrung"}, {"from": "Namrung", "length": 4, "title": "Distance: 4 km", "to": "Lho"}, {"from": "Lho", "length": 4, "title": "Distance: 4 km", "to": "Samagaon"}, {"from": "Samagaon", "length": 0, "title": "Distance: 0 km", "to": "Manaslu Basecamp"}, {"from": "Samagaon", "length": 0, "title": "Distance: 0 km", "to": "Birendra Tal"}, {"from": "Samagaon", "length": 4, "title": "Distance: 4 km", "to": "Samdo"}, {"from": "Samdo", "length": 4, "title": "Distance: 4 km", "to": "Dharamsala"}, {"from": "Dharamsala", "length": 0, "title": "Distance: 0 km", "to": "Larkya La High Pass"}, {"from": "Larkya La High Pass", "length": 11, "title": "Distance: 11 km", "to": "Bimthang"}, {"from": "Bimthang", "length": 9, "title": "Distance: 9 km", "to": "Dharapani"}, {"from": "Dharapani", "length": 0, "title": "Distance: 0 km", "to": "Besisahar"}, {"from": "Besisahar", "length": 10, "title": "Distance: 10 km", "to": "Kathmandu"}, {"from": "Kathmandu", "length": 0.83, "title": "Distance: 0.83 km", "to": "Nepalgunj"}, {"from": "Nepalgunj", "length": 0.33, "title": "Distance: 0.33 km", "to": "Jumla"}, {"from": "Jumla", "length": 6, "title": "Distance: 6 km", "to": "Uthugaon"}, {"from": "Uthugaon", "length": 6, "title": "Distance: 6 km", "to": "Danphe Lagna"}, {"from": "Danphe Lagna", "length": 6, "title": "Distance: 6 km", "to": "Chautha"}, {"from": "Chautha", "length": 6, "title": "Distance: 6 km", "to": "Dhotu"}, {"from": "Dhotu", "length": 6, "title": "Distance: 6 km", "to": "Rara Lake"}, {"from": "Rara Lake", "length": 5, "title": "Distance: 5 km", "to": "Gorosingha"}, {"from": "Gorosingha", "length": 6, "title": "Distance: 6 km", "to": "Sinja"}, {"from": "Sinja", "length": 6, "title": "Distance: 6 km", "to": "Jaljala Chaur"}, {"from": "Jaljala Chaur", "length": 6, "title": "Distance: 6 km", "to": "Jumla"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
