@@ -113,7 +113,7 @@
             }
 
             var result = findPathWithHighestCulturalSignificance(startNode, endNode);
-            document.getElementById('highest-cultural-path-result').innerText = "Path with highest cultural significance: " + result.path.join(' -> ')
+            document.getElementById('highest-cultural-path-result').innerText = "Path with highest cultural significance: " + result.path.join(' -> ') + " (Cultural Score: " + result.culturalScore + ")";
 
             // Reset edge styles to original
             edges.forEach(function(edge) {
@@ -161,7 +161,7 @@
             }
 
             var result = findPathWithMinimalElevationChange(startNode, endNode);
-            document.getElementById('minimal-elevation-path-result').innerText = "Path with minimal elevation change: " + result.path.join(' -> ') 
+            document.getElementById('minimal-elevation-path-result').innerText = "Path with minimal elevation change: " + result.path.join(' -> ') + " (Distance: " + result.distance + " km)";
 
             // Reset edge styles to original
             edges.forEach(function(edge) {

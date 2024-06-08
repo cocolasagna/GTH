@@ -1,0 +1,82 @@
+body{
+    background-color: bisque;
+}
+
+
+.button {
+    background-color: #4CAF50; /* Green color */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Add rounded corners */
+  }
+  
+  /* Hover effect for the button */
+  .button:hover {
+    background-color: #45A049; /* Darker green on hover */
+    box-shadow: 0 5px #666; /* Add a slight shadow on hover */
+  }
+
+  #button {
+    background-color: #4CAF50; /* Green color */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Add rounded corners */
+  }
+
+  .select-container {
+    margin: 10px;
+}
+
+select {
+    width: 250px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 16px;
+    color: #333;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* For older browsers */
+select::-ms-expand {
+    display: none;
+}
+
+p:not(:empty) {
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 20px 0;
+  padding: 10px;
+  border-left: 4px solid #007bff;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
